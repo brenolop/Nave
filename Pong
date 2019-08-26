@@ -1,0 +1,127 @@
+
+<canvas id="meuCanvas" width="800" height="600"></canvas>
+
+<script>
+
+    
+    var canvas = document.getElementById("meuCanvas");
+    var context = canvas.getContext("2d");
+  
+    var vR = 5
+    var vy = 5
+    var R = 300;
+    var y = 300;
+    var a = 250;
+    var b = 250;
+    
+    var moveCima = false;
+    var moveBaixo = false;
+    var moveCima2 = false;
+    var moveBaixo2 = false;
+    
+    window.addEventListener( "keydown", onKeyDown, true );
+
+function onKeyDown( e )
+{
+  
+    
+  if( e.keyCode == 87 ) 
+  {
+       
+       moveCima = true;
+       moveBaixo = false;
+  }
+  if( e.keyCode == 83 ) 
+  {
+      
+      moveBaixo = true;
+      moveCima = false; 
+      
+       
+  }
+if( e.keyCode == 38 ) 
+  {
+       
+       moveCima2 = true;
+       moveBaixo2 = false;
+  }
+  if( e.keyCode == 40 ) 
+  {
+      
+      moveBaixo2 = true;
+      moveCima2 = false; 
+       
+  }
+
+
+
+}
+    
+
+function draw() {
+ 
+  context.fillStyle = "black";
+  context.fillRect(0,0,600,600);
+    
+    R = R + vR;
+    y = y + vy;
+        
+        
+        if (R>560){
+            vR=vR*(-1);    
+            
+        }
+        
+        if(R < 60){
+            vR=vR*(-1);
+        }
+        if (y>450){
+            vy=vy*(-1);    
+            
+        }
+        
+        if(y < 60){
+            vy=vy*(-1);
+        }
+    
+    if(moveCima == true) 
+    {
+        if (a > 0)
+        a = a - 10;
+    }  
+    
+    if(moveBaixo == true)
+    {    
+        if (a < 550)
+        a = a + 10;
+    }
+    
+    if(moveCima2 == true) 
+    {           
+         if ( b > 0)
+        b = b - 10;
+    }  
+    
+    if(moveBaixo2 == true)
+    {    
+         if ( b < 550)
+        b = b + 10;
+    }
+
+    
+  context.fillStyle = "white"
+  context.fillRect(10, b, 15,80);
+  context.fillRect(570, a, 15,80);
+  
+  context.beginPath();
+  context.ellipse(R, y, 8, 8, 0, 0, 2 * Math.PI);
+  context.fill();
+  
+  
+    requestAnimationFrame(draw);
+
+}
+draw();
+
+    
+</script>
